@@ -22,5 +22,8 @@ if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
   exec java "${java_opts_array[@]}" -jar /usr/share/jenkins/jenkins.war "${jenkins_opts_array[@]}" "$@"
 fi
 
+#  sleep so that Bluemix can complete the networking setup before jenkins starts
+sleep 60
+
 # As argument is not jenkins, assume user want to run his own process, for example a `bash` shell to explore this image
 exec "$@"
