@@ -6,6 +6,12 @@ RUN apt-get install -qq vim
 
 RUN apt-get update && apt-get install -qq ant 
 
+# install cf cli
+ENV CF_CLI $PWD/
+ADD https://cli.run.pivotal.io/stable?release=linux32-binary&version=6.19.0&source=github-rel $CF_CLI/cf.tgz
+RUN tar zxvf $CF_CLI/cf.tgz
+ENV PATH $CF_CLI:$PATH
+
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT 50000
 
