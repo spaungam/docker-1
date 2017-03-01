@@ -1,10 +1,13 @@
 FROM openjdk:8-jdk
 
+#RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
 RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
-RUN apt-get update
-RUN apt-get install -qq vim
+RUN apt-get update && apt-get install -qq vim
 
+# # Development build tools
 RUN apt-get update && apt-get install -qq ant 
+RUN apt-get update && apt-get install -qq gradle 
+RUN apt-get update && apt-get install -qq maven 
 
 # install cf cli
 ENV CF_CLI $PWD/
@@ -35,9 +38,8 @@ VOLUME /var/jenkins_home
 # or config file with your custom jenkins Docker image.
 RUN mkdir -p /usr/share/jenkins/ref/init.groovy.d
 
-ENV TINI_VERSION 0.13.2
-ENV TINI_SHA afbf8de8a63ce8e4f18cb3f34dfdbbd354af68a1
-
+ENV TINI_VERSION 0.13.2 
+ENV TINI_SHA afbf8de8a63ce8e4f18cb3f34dfdbbd354af68a1 
 # Use tini as subreaper in Docker container to adopt zombie processes 
 RUN curl -fsSL https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-static-amd64 -o /bin/tini && chmod +x /bin/tini \
   && echo "$TINI_SHA  /bin/tini" | sha1sum -c -

@@ -23,7 +23,7 @@ if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
 fi
 
 #  sleep so that Bluemix can complete the networking setup before jenkins starts
-sleep 60
+# sleep 60
 
 # As argument is not jenkins, assume user want to run his own process, for example a `bash` shell to explore this image
 exec "$@"
