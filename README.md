@@ -1,4 +1,5 @@
 # Custom Jenkins Docker image for Bluemix
+- `git clone https://github.com/spaungam/docker-1`
 - `docker build -t myjenkins .`
 - `docker run -p 8080:8080 -p 50000:50000 -v ~/jenkinsdata:/var/jenkins_home myjenkins`
 - `docker tag myjenkins registry.ng.bluemix.net/mycontainers/myjenkins`
